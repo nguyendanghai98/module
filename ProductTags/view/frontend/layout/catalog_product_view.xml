@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <css src="AHT_ProductTags::_module.css" />
+    </head> 
+	<body>
+		<referenceBlock name="product.info.details">
+			<block ifconfig="producttags/options/enable" as="tagform" class="AHT\ProductTags\Block\TagForm" name="product.tags" template="AHT_ProductTags::tagform.phtml" group="detailed_info" cacheable="false">
+				<arguments>
+					<argument translate="true" name="title" xsi:type="string">Tags</argument>
+					<!-- <argument translate="true" name="template" xsi:type="string">AHT_ProductTags::titleblog.phtml</argument> -->
+              	</arguments>
+            </block>
+		</referenceBlock>
+		<referenceBlock name="content">
+			<block ifconfig="producttags/options/showalsotagged" as="alsotagged" class="AHT\ProductTags\Block\AlsoTagged" name="product.relatedtags" template="AHT_ProductTags::alsotagged.phtml" before="page.bottom.container"/>
+		</referenceBlock>
+	</body>
+</page>

@@ -1,0 +1,206 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">producttags_tags_listing.producttags_tags_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <!-- <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Add new Tags</label>
+            </button>
+        </buttons> -->
+        <spinner>producttags_tags_columns</spinner>
+        <deps>
+            <dep>producttags_tags_listing.producttags_tags_listing_data_source</dep>
+        </deps>
+    </settings>
+    <!-- <massaction name="listing_massaction">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="indexField" xsi:type="string">tags_id</item>
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+            </item>
+        </argument>
+        <action name="delete">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="type" xsi:type="string">delete</item>
+                    <item name="label" xsi:type="string" translate="true">Delete</item>
+                    <item name="url" xsi:type="url" path="producttags/tags/massDelete"/>
+                    <item name="confirm" xsi:type="array">
+                        <item name="title" xsi:type="string" translate="true">Delete item</item>
+                        <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
+                    </item>
+                </item>
+            </argument>
+        </action>
+    </massaction> -->
+    <dataSource component="Magento_Ui/js/grid/provider" name="producttags_tags_listing_data_source">
+        <settings>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>AHT_ProductTags::Tags</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="producttags_tags_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>tags_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters">
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+            <filterSelect name="tags_id" provider="${ $.parentName }">
+                <settings>
+                    <captionValue>0</captionValue>
+                    <options class="Magento\Cms\Ui\Component\Listing\Column\Cms\Options"/>
+                    <label translate="true">Store View</label>
+                    <dataScope>tags_id</dataScope>
+                    <imports>
+                        <link name="visible">componentType = column, index = ${ $.index }:visible</link>
+                    </imports>
+                </settings>
+            </filterSelect>
+        </filters>
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="producttags/tags/massdelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <!-- <action name="enable">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want enable items?</message>
+                        <title translate="true">Enable items</title>
+                    </confirm>
+                    <url path="producttags/tags/massenable"/>
+                    <type>enable</type>
+                    <label translate="true">Enable</label>
+                </settings>
+            </action>
+            <action name="disable">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want disable items?</message>
+                        <title translate="true">Disable items</title>
+                    </confirm>
+                    <url path="producttags/tags/massdisable"/>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
+                </settings>
+            </action> -->
+            <!-- <action name="edit">
+                <settings>
+                    <callback>
+                        <target>editSelected</target>
+                        <provider>producttags_tags_listing.producttags_tags_listing.producttags_tags_columns_editor</provider>
+                    </callback>
+                    <type>edit</type>
+                    <label translate="true">Edit</label>
+                </settings>
+            </action> -->
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="producttags_tags_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>tags_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="tags_id">
+            <settings>
+                <filter>text</filter>
+                <sorting>asc</sorting>
+                <label translate="true">ID</label>
+            </settings>
+        </column>      
+        <column name="value">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">URL Key</item>
+                </item>
+            </argument>
+        </column> 
+        <column name="product_name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Product Name</label>
+            </settings>
+        </column>
+        <column name="tag">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Tag</label>
+            </settings>
+        </column>
+        <column name="product_id">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Product ID</label>
+            </settings>
+        </column> 
+        <column name="user_id">
+            <settings>
+                <filter>text</filter>
+                <!-- <sorting>asc</sorting> -->
+                <label translate="true">User_ID</label>
+            </settings>
+        </column>    
+        <column name="status" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="AHT\ProductTags\Model\Tags\Source\Status"/>
+                <filter>select</filter>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+            </settings>
+        </column>
+        <!-- <column name="store_id" class="Magento\Store\Ui\Component\Listing\Column\Store">
+            <settings>
+                <label translate="true">Store View</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <sortable>false</sortable>
+            </settings>
+        </column> -->
+        <actionsColumn class="AHT\ProductTags\Ui\Component\Listing\Column\TagsActions" name="actions">
+            <argument name="data" xsi:type="array">
+                <item name="sortOrder" xsi:type="number">99</item>
+            </argument>
+            <settings>
+                <indexField>tags_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

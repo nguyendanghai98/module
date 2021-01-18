@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <!--<add id="Wemessage::top_level" module="Wemessage_ProductTags" resource="Magento_Backend::content" sortOrder="9999" title="Wemessage"/>-->
+        <!-- <add 
+            action="wemessage_producttags/tags/index" 
+            id="Wemessage_ProductTags::wemessage_producttags_tags" 
+            module="Wemessage_ProductTags" parent="Wemessage::top_level" 
+            resource="Magento_Backend::content" 
+            sortOrder="9999" 
+            title="Tags"
+        /> -->
+        <add
+            id="AHT_ProductTags::producttags"
+            title="Tags"
+            module="AHT_ProductTags"
+            sortOrder="45"
+            resource="AHT_ProductTags::producttags"
+        />
+        <add
+            id="AHT_ProductTags::index"
+            title="Product Tags "
+            module="AHT_ProductTags"
+            sortOrder="150"
+            parent="AHT_ProductTags::producttags"
+            action="producttags/tags/index"
+            resource="AHT_ProductTags::index"
+        />
+    </menu>
+</config>

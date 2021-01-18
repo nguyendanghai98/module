@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="AHT\ProductTags\Api\TagsRepositoryInterface" type="AHT\ProductTags\Model\TagsRepository"/>
+	<preference for="AHT\ProductTags\Api\Data\TagsInterface" type="AHT\ProductTags\Model\Data\Tags"/>
+	<preference for="AHT\ProductTags\Api\Data\TagsSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<!-- <virtualType name="AHT\ProductTags\Model\ResourceModel\Tags\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">aht_producttags_tags</argument>
+			<argument name="resourceModel" xsi:type="string">AHT\ProductTags\Model\ResourceModel\Tags\Collection</argument>
+		</arguments>
+	</virtualType> -->
+	<virtualType name="AHT\ProductTags\Model\ResourceModel\Tags\Grid\Collection" >
+        <arguments>
+            <argument name="mainTable" xsi:type="string">aht_producttags_tags</argument>
+            <argument name="resourceModel" xsi:type="string">AHT\ProductTags\Model\ResourceModel\Tags</argument>
+        </arguments>
+    </virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="producttags_tags_listing_data_source" xsi:type="string">AHT\ProductTags\Model\ResourceModel\Tags\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+</config>
